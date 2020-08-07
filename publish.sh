@@ -1,8 +1,8 @@
 #!/bin/bash
 
-export COMMIT_SHA=$(git rev-parse HEAD)
-export APP=anz_test2
-export REPO=docker.io/namelessnameless/$APP
+COMMIT_SHA=$(git rev-parse HEAD)
+APP=anz_test2
+REPO=docker.io/namelessnameless/$APP
 
 TAG="${APP}:${COMMIT_SHA}"
 
