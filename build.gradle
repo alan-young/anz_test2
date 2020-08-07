@@ -24,6 +24,10 @@ plugins {
     id 'jacoco' // code coverage
 }
 
+spotbugs {
+    excludeFilter = file("config/spotbugs-exclude.xml")
+}
+
 spotbugsMain {
     reports {
         xml.enabled = false
@@ -36,7 +40,7 @@ jacocoTestCoverageVerification {
     afterEvaluate {
         getClassDirectories().setFrom(classDirectories.files.collect {
             fileTree(dir: it, exclude:  [
-                    'com/samlinasoft/gcp/App.class'
+                    'com/samlinasoft/gcp/App.class', 'com/samlinasoft/gcp/VersionFileReader.class'
             ])
         })
     }
@@ -84,6 +88,7 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.22.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     components {

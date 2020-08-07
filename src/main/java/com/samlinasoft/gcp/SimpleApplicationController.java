@@ -12,10 +12,13 @@ public class SimpleApplicationController {
 
     @Autowired
     private Environment env;
-    
+
+    @Autowired
+    private VersionFileReader versionFileReader;
 
     @RequestMapping(value="/version", method= RequestMethod.GET)
-    public VersionDTO getVersion() {
-        return new VersionDTO(env.getProperty("VERSION"), env.getProperty("COMMIT_SHA"), "pre-interview technical test");
+    public VersionDTO getVersion() throws Exception {
+
+        return new VersionDTO(versionFileReader.getVersionNumber(), env.getProperty("COMMIT_SHA"), "pre-interview technical test");
     }
 }

@@ -13,4 +13,4 @@ else
   LATEST_TAG="${APP}:latest"
 fi
 
-docker build --build-arg VERSION=$(cat VERSION.txt) --build-arg COMMIT_SHA=$COMMIT_SHA -t $SHA_TAG -t $LATEST_TAG .
+docker build --build-arg COMMIT_SHA=$COMMIT_SHA -t $SHA_TAG -t $LATEST_TAG .
