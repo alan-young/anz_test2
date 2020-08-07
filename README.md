@@ -30,7 +30,9 @@ The ```build.sh``` script is used to build the containerised app, the image is t
 
 ### From Cloud Build
 
-[TODO]
+The ```cloudbuild.yaml``` file can be used as a trigger target to build the Docker image and store it in Google Container Repository.
+
+The image will be tagged with ```gcr.io/$PROJECT_ID/anz_test2:<GIT COMMIT SHA>``` as well as ```gcr.io/$PROJECT_ID/anz_test2:latest```and pushed to your project's GCR repository.
 
 ## Publishing
 
@@ -77,4 +79,5 @@ Kubernetes_deploy,sh assumes that there is a namespace called â€œtechnical-testâ
 - Integration testing has not been included in the CI pipeline, ideally the containerised app should be spun up and then the /version endpoint pinged as part of an integration test.
 - Building with the standard Gradle image is slow as each time all dependencies are downloaded to the gradle cache; to speed the process up look at using a custom Gradle image with all the dependencies preloaded or turning the BuildKit version of docker on to take advantage of the ability to use a cache mount. 
 - The ```publish.sh``` and ```build.sh``` could be combined into a Makefile so we're not duplicating variable definitions
+- Because we are passing in the version information at build time, there could be a mismatch between the actual version and what the user sets. 
 
