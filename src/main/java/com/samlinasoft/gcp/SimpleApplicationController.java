@@ -16,9 +16,11 @@ public class SimpleApplicationController {
     @Autowired
     private VersionFileReader versionFileReader;
 
+    public static final String VERSION_FILENAME = "VERSION.txt";
+    public static final String COMMIT_SHA = "COMMIT_SHA";
+
     @RequestMapping(value="/version", method= RequestMethod.GET)
     public VersionDTO getVersion() throws Exception {
 
-        return new VersionDTO(versionFileReader.getVersionNumber(), env.getProperty("COMMIT_SHA"), "pre-interview technical test");
-    }
+        return new VersionDTO(versionFileReader.getVersionNumber(VERSION_FILENAME), env.getProperty(COMMIT_SHA), "pre-interview technical test");    }
 }

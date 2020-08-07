@@ -40,7 +40,7 @@ jacocoTestCoverageVerification {
     afterEvaluate {
         getClassDirectories().setFrom(classDirectories.files.collect {
             fileTree(dir: it, exclude:  [
-                    'com/samlinasoft/gcp/App.class', 'com/samlinasoft/gcp/VersionFileReader.class'
+                    'com/samlinasoft/gcp/App.class'
             ])
         })
     }

@@ -12,6 +12,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -28,9 +29,9 @@ public class SimpleApplicationControllerTest {
     VersionFileReader versionFileReader;
 
     @Test
-    public void whenVersionEndpointCalled_then_returnsCorrectVerisonInformation() throws Exception{
+    public void whenVersionEndpointCalled_then_returnsCorrectVerisonInformation() throws Exception {
 
-        Mockito.when(versionFileReader.getVersionNumber()).thenReturn("5.0.0");
+        Mockito.when(versionFileReader.getVersionNumber(anyString())).thenReturn("5.0.0");
 
         mvc.perform(get("/version")
             .contentType(MediaType.APPLICATION_JSON))
