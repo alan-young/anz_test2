@@ -81,6 +81,7 @@ The API can be reached via: ```http://<host ip>:8080/version```
 
 - The Kubernetes deployment manifest ```kubernetes/deployment.yaml``` deploys the 'latest' image from a dockerhub repo, ideally the script should be parameterised to take in the "repo/image name:tag" and then update the corresponding details in the kubernetes/deployment.yaml file then call kubectl to apply it.
 - Metrics will also need to be defined as part of productionising the app. 
+- Need to set up a proper and secured CD process which includes proper admission control to deploy onto the cluster.
 - Integration testing has not been included in the CI pipeline, ideally the containerised app should be spun up and then the /version endpoint pinged as part of an integration test.
 - Building with the standard Gradle image is slow as each time all dependencies are downloaded to the gradle cache; to speed the process up look at using a custom Gradle image with all the dependencies preloaded or turning the BuildKit version of docker on to take advantage of the ability to use a cache mount. 
 - The ```publish.sh``` and ```build.sh``` could be combined into a Makefile so we're not duplicating variable definitions 
