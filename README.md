@@ -52,8 +52,12 @@ $ docker run -p8080:8080 anz_test2:latest
 ### Kubernetes Deployment
 Deployment into kubernetes is via: 
 ```
-./kubernetes_deploy.sh
+./kubernetes_deploy.sh <image name>
 ```
+e.g. ```./kubernetes_deploy.sh alan-young/anz_test2:latest```
+
+There is a default variable (IMAGE_TO_DEPLOY) in ```./kubernetes_deploy.sh ``` which is used if no image name is provided.
+
 Kubernetes_deploy,sh assumes that there is a namespace called “technical-test”, if not create it via ```kubectl create namespace technical-test```
 
 ## API endpoint
@@ -79,7 +83,6 @@ The API can be reached via: ```http://<host ip>:8080/version```
 - The app container runs as the root user, this should be locked down to make it production ready.
 - The Kubernetes deployment manifest ```kubernetes/deployment.yaml```has not had any best practice security applied to it i.e. no restrictions on running as privileged user or restrictions based on linux capabilities. This needs to be done as part of productionising it.
 
-- The Kubernetes deployment manifest ```kubernetes/deployment.yaml``` deploys the 'latest' image from a dockerhub repo, ideally the script should be parameterised to take in the "repo/image name:tag" and then update the corresponding details in the kubernetes/deployment.yaml file then call kubectl to apply it.
 - Metrics will also need to be defined as part of productionising the app. 
 - Need to set up a proper and secured CD process which includes proper admission control to deploy onto the cluster.
 - Integration testing has not been included in the CI pipeline, ideally the containerised app should be spun up and then the /version endpoint pinged as part of an integration test.
